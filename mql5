@@ -1,0 +1,135 @@
+mql5
+//+------------------------------------------------------------------+
+//|                                              Triton              |
+//|                                             forexroboteasy.com  |
+//|                                      Forex Robot Easy Team       |
+//|                                                                  |
+//| Terms of Reference:                                              |
+//| 1. Develop code for Triton, a forex trading robot designed for    |
+//|    major currency pairs.                                          |
+//| 2. Implement three strategies - swing, gap, and support and       |
+//|    resistance - to analyze price data and determine optimal       |
+//|    parameters for profitable trades.                              |
+//| 3. Include a software filter that analyzes daily and monthly      |
+//|    charts over the last 12 periods to filter trades.              |
+//| 4. The Swing strategy should be applicable on TF H1 or M30, with  |
+//|    the option for more frequent trades but higher risk on M15 or  |
+//|    M5.                                                           |
+//| 5. The Gap strategy is recommended for use on M30 or H1           |
+//|    timeframes.                                                    |
+//| 6. The Support and Resistance strategy is best suited for M30,    |
+//|    H1, or H4 timeframes.                                          |
+//| 7. Provide default settings for EURUSD, GBPUSD, and USDJPY on    |
+//|    the M30 timeframe.                                             |
+//| 8. Ensure compatibility with brokers that do not average multiple |
+//|    positions into one position.                                   |
+//| 9. Account for various execution order types offered by different|
+//|    brokers.                                                       |
+//| 10. Customize trading experience by providing options for traders |
+//|     to adjust settings.                                           |
+//| 11. Limit the terms of reference to code requirements and         |
+//|     necessary feature development.                                |
+//| 12. Specify only the essential trading functions in the           |
+//|     technical specification.                                      |
+//| 13. The size of the terms of reference should not exceed          |
+//|     1500-2000 characters.                                         |
+//+------------------------------------------------------------------+
+
+// Include necessary libraries and resources
+#include <Trade\Trade.mqh>
+#include <Technical\Indicators.mqh>
+#include <Trade\PositionInfo.mqh>
+
+// Define constants for currency pairs and timeframes
+const string DEFAULT_SYMBOLS[] = {'EURUSD', 'GBPUSD', 'USDJPY'};
+const ENUM_TIMEFRAMES DEFAULT_TIMEFRAME = PERIOD_M30;
+
+// Define Triton class
+class Triton
+{
+private:
+    // Declare variables and objects
+    string symbol;
+    ENUM_TIMEFRAMES timeframe;
+    CTrade trade;
+    CPositionInfo positionInfo;
+
+public:
+    // Constructor
+    Triton(string _symbol, ENUM_TIMEFRAMES _timeframe)
+    {
+        symbol = _symbol;
+        timeframe = _timeframe;
+    }
+
+    // Main entry point for the trading robot
+    void Start()
+    {
+        // Logic for swing strategy
+        if (timeframe == PERIOD_H1 || timeframe == PERIOD_M30)
+        {
+            // Implement swing strategy logic here
+            // ...
+        }
+        else if (timeframe == PERIOD_M15 || timeframe == PERIOD_M5)
+        {
+            // Implement swing strategy logic with higher risk here
+            // ...
+        }
+
+        // Logic for gap strategy
+        if (timeframe == PERIOD_M30 || timeframe == PERIOD_H1)
+        {
+            // Implement gap strategy logic here
+            // ...
+        }
+
+        // Logic for support and resistance strategy
+        if (timeframe == PERIOD_M30 || timeframe == PERIOD_H1 || timeframe == PERIOD_H4)
+        {
+            // Implement support and resistance strategy logic here
+            // ...
+        }
+
+        // Apply software filter
+        if (FilterTrades())
+        {
+            // Execute trades
+            ExecuteTrades();
+        }
+    }
+
+private:
+    // Apply software filter to analyze price data over the last 12 periods
+    bool FilterTrades()
+    {
+        // Implement software filter logic here
+        // ...
+
+        return true; // Return true if trades pass the filter
+    }
+
+    // Execute trades based on the selected strategies and filtered data
+    void ExecuteTrades()
+    {
+        // Implement trade execution logic here
+        // ...
+    }
+};
+
+// Initialize Triton trading robot with default settings
+void OnInit()
+{
+    for (int i = 0; i < ArraySize(DEFAULT_SYMBOLS); i++)
+    {
+        Triton triton(DEFAULT_SYMBOLS[i], DEFAULT_TIMEFRAME);
+        triton.Start();
+    }
+}
+
+// Main program entry point
+void OnStart()
+{
+    // Start trading
+    OnInit();
+}
